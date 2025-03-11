@@ -37,11 +37,37 @@ public class Sandbox {
             int conditionEnd = json.indexOf("\"", conditionIndex);
             String condition = json.substring(conditionIndex, conditionEnd);
 
-            // Check if weather condition contains "rain" or "storm"
-            return !(condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("storm"));
-        } catch (Exception e) {
-            return false;
+            int tempIndex = json.indexOf("\"temp_c\":") + 9;
+            int tempEnd = json.indexOf(",", tempIndex);
+            double temperature = Double.parseDouble(json.substring(tempIndex, tempEnd));
+
+              // Extract cloud cover (%)
+            int cloudIndex = json.indexOf("\"cloud\":") + 8;
+            int cloudEnd = json.indexOf(",", cloudIndex);
+            int cloudCover = Integer.parseInt(json.substring(cloudIndex, cloudEnd));
+
+            boolean isRightTemp = (temperature > 0);
+            boolean isRightCloud = (cloudCover < 80);
+            boolean isRightCondition = !((condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("storm")));
+
+            if ((isRightTemp) && (isRightCloud) && (isRightCondition))
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
+        
+
+
+            // Check if weather condition contains "rain" or "storm"
+        //     return !(condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("storm"));
+        // } catch (Exception e) {
+        //     return false;
+        // }
     }
 
     public static void main(String[] args) {
