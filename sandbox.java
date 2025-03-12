@@ -59,15 +59,15 @@ public class Sandbox {
                 return false;
             }
 
-        }
+        
         
 
 
             // Check if weather condition contains "rain" or "storm"
         //     return !(condition.toLowerCase().contains("rain") || condition.toLowerCase().contains("storm"));
-        // } catch (Exception e) {
-        //     return false;
-        // }
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     public static void main(String[] args) {
